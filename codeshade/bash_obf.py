@@ -3,7 +3,6 @@
 
 from pathlib import Path
 import base64, shutil
-from typing import Optional
 from .core import run_cmd, write_text, read_text, C
 
 BASH_CMD = "bash-obfuscate"

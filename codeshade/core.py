@@ -3,7 +3,6 @@
 
 from pathlib import Path
 import subprocess
-from typing import List, Any, Dict
 
 class C:
     reset = "\033[0m"
@@ -27,7 +26,7 @@ def read_bytes(p: Path) -> bytes:
 def write_text(p: Path, data: str) -> None:
     p.write_text(data, encoding="utf-8")
 
-def run_cmd(cmd: List[str], capture: bool=False, check: bool=True):
+def run_cmd(cmd: list[str], capture: bool=False, check: bool=True):
     if not cmd:
         raise RuntimeError("empty command")
     return subprocess.run(cmd, capture_output=capture, text=True, check=check)

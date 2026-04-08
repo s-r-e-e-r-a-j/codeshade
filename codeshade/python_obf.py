@@ -4,7 +4,6 @@
 from pathlib import Path
 import base64
 from .core import read_text, read_bytes, write_text, C
-from typing import List
 
 EMOJI = ["😀","😃","😄","😁","😅","🤣","😂","😉","😊","😍"]
 CHUNK = 64
@@ -14,7 +13,7 @@ def to_base64(src: Path, dst: Path, var: str = "payload") -> None:
         raise ValueError("invalid var name")
     data = read_text(src)
     b64 = base64.b64encode(data.encode()).decode()
-    lines: List[str] = [f"{var}=''"]
+    lines: list[str] = [f"{var}=''"]
     for i in range(0, len(b64), CHUNK):
         seg = b64[i:i+CHUNK]
         esc = ''.join(f"\\x{ord(c):02x}" for c in seg)
@@ -32,13 +31,13 @@ def to_emoji(src: Path, dst: Path) -> None:
     data = read_bytes(src)
     if not data:
         raise RuntimeError("empty source")
-    tokens: List[str] = []
+    tokens: list[str] = []
     for b in data:
         s = f"{b:03d}"
         token = " ".join(digit_map[d] for d in s)
         tokens.append(token)
     big = "  ".join(tokens)
-    gen: List[str] = []
+    gen: list[str] = []
     gen.append(f"emoji_map = {rev_map!r}")
     gen.append(f"data = '''{big}'''")
     gen.append("parts = []")

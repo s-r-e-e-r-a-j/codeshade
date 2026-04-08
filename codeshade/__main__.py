@@ -4,7 +4,6 @@
 from pathlib import Path
 import sys
 import argparse
-from typing import Any
 
 from .core import read_text, read_bytes, write_text, run_cmd, C
 from .python_obf import to_base64, to_emoji
